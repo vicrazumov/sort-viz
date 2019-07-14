@@ -59,6 +59,7 @@ const drawArray = [...randomArray]
 
 draw(drawArray)
 
+const functionText = document.getElementById('code').value
 
 const blob = new Blob([
 `var queue = []
@@ -73,13 +74,12 @@ var arrayChangeHandler = {
   }
 };
 
-onmessage = function(e) {
+onmessage = function() {
   queue = [];
 
-  var proxyToArray = new Proxy(e.data.array, arrayChangeHandler);
+  var proxyToArray = new Proxy([${randomArray.join(',')}], arrayChangeHandler);
 
-  var functionText = e.data.code;
-  var functionFromText = new Function('return ' + functionText)
+  var functionFromText = new Function('return ' + ${functionText})
   functionFromText()(proxyToArray);
 
   postMessage(queue);
@@ -93,8 +93,7 @@ worker.onmessage = function(e) {
   tick(queue);
 }
 
-const functionText = document.getElementById('code').value
-worker.postMessage({ code: functionText, array: randomArray })
+worker.postMessage(null)
 
 let idx = 0
 
