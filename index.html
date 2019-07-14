@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="container">
+      <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+      </div>
+      <div id="controlContainer">
+        <label>Array of numbers:</label>
+        <textarea id="numberArray" rows="10"></textarea>
+        <label>Code:</label>
+        <textarea id="code" rows="30">
+function run(arr) {
+  function partition(items, left, right) {
+    const p = items[(left + right) >> 1];
+
+    while (left <= right) {
+      while (items[left] < p) left++;
+      while (items[right] > p) right--;
+
+      if (left <= right) {
+        [items[left], items[right]] = [items[right], items[left]];
+        left++;
+        right--;
+      }
+    }
+
+    return left;
+  }
+
+  function quickSort(items, left, right) {
+    left = left || 0
+    right = right || items.length - 1
+
+    const index = partition(items, left, right);
+
+    if (left < index - 1) {
+      quickSort(items, left, index - 1);
+    }
+
+    if (right > index) {
+      quickSort(items, index, right);
+    }
+  };
+
+  quickSort(arr)
+}
+        </textarea>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

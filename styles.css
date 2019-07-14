@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+#canvasContainer {
+  width: 60%;
+}
+
+#controlContainer {
+  width: 40%;
+}
+
+#controlContainer > textarea {
+  display: block;
+  width: 100%;
+}
+
+#code {
+  font-family: monospace;
+}
